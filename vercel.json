@@ -1,6 +1,12 @@
 {
   "version": 2,
-  "framework": "tanstack-start",
+  "framework": "vite",
   "buildCommand": "bun run build",
-  "outputDirectory": ".output"
+  "outputDirectory": "dist/client",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
 }
