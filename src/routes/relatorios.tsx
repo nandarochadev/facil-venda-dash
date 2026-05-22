@@ -41,6 +41,16 @@ function RelatoriosPage() {
 
   const monthName = now.toLocaleDateString("pt-BR", { month: "long", year: "numeric" });
 
+  const today = now.toDateString();
+  const todaySales = sales.filter((s) => new Date(s.date).toDateString() === today);
+  const lojaToday = todaySales
+    .filter((s) => (s.channel ?? "Loja") === "Loja")
+    .reduce((s, x) => s + x.total, 0);
+  const ifoodToday = todaySales
+    .filter((s) => s.channel === "iFood")
+    .reduce((s, x) => s + x.total, 0);
+  const totalToday = lojaToday + ifoodToday;
+
   return (
     <div className="h-[calc(100vh-1.5rem)] overflow-y-auto pr-1 space-y-3">
       <div className="bg-card rounded-xl border px-5 py-4 flex items-center justify-between">
@@ -54,6 +64,37 @@ function RelatoriosPage() {
           <div className="text-xs text-muted-foreground mt-0.5">{monthSales.length} venda(s)</div>
         </div>
       </div>
+
+      <div className="bg-card rounded-xl border p-5">
+        <div className="flex items-baseline justify-between mb-4">
+          <div>
+            <h3 className="font-medium">Vendas do dia por canal</h3>
+            <p className="text-xs text-muted-foreground">Loja física vs. entregas iFood</p>
+          </div>
+          <div className="text-xs text-muted-foreground">
+            {todaySales.length} venda(s) hoje
+          </div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+          <div className="rounded-lg border p-4">
+            <div className="text-xs text-muted-foreground">Vendas na loja</div>
+            <div className="text-xl font-semibold mt-1">{formatBRL(lojaToday)}</div>
+          </div>
+          <div className="rounded-lg border p-4">
+            <div className="text-xs text-muted-foreground">Vendas pelo iFood</div>
+            <div className="text-xl font-semibold mt-1 text-[#EA1D2C]">
+              {formatBRL(ifoodToday)}
+            </div>
+          </div>
+          <div className="rounded-lg border p-4 bg-primary/5">
+            <div className="text-xs text-muted-foreground">Total do dia</div>
+            <div className="text-xl font-semibold mt-1 text-primary">
+              {formatBRL(totalToday)}
+            </div>
+          </div>
+        </div>
+      </div>
+
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
         <div className="bg-card rounded-xl border p-5">
