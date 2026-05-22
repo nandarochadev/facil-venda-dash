@@ -1,8 +1,9 @@
 import { Link, Outlet, useRouterState } from "@tanstack/react-router";
-import { ShoppingBag, Package, History, BarChart3, Settings } from "lucide-react";
+import { ShoppingBag, Package, History, BarChart3, Settings, Bike } from "lucide-react";
 
 const nav = [
-  { to: "/", label: "PDV", icon: ShoppingBag },
+  { to: "/pdv", label: "PDV", icon: ShoppingBag },
+  { to: "/ifood", label: "iFood", icon: Bike },
   { to: "/estoque", label: "Estoque", icon: Package },
   { to: "/historico", label: "Histórico", icon: History },
   { to: "/relatorios", label: "Relatórios", icon: BarChart3 },
@@ -19,10 +20,7 @@ export function AppShell() {
         </div>
         <nav className="flex-1 p-3 space-y-1">
           {nav.map((item) => {
-            const active =
-              item.to === "/"
-                ? location.pathname === "/"
-                : location.pathname.startsWith(item.to);
+            const active = location.pathname.startsWith(item.to);
             const Icon = item.icon;
             return (
               <Link

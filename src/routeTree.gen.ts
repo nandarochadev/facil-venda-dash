@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as RelatoriosRouteImport } from './routes/relatorios'
 import { Route as PdvRouteImport } from './routes/pdv'
+import { Route as IfoodRouteImport } from './routes/ifood'
 import { Route as HistoricoRouteImport } from './routes/historico'
 import { Route as EstoqueRouteImport } from './routes/estoque'
 import { Route as ConfiguracoesRouteImport } from './routes/configuracoes'
@@ -24,6 +25,11 @@ const RelatoriosRoute = RelatoriosRouteImport.update({
 const PdvRoute = PdvRouteImport.update({
   id: '/pdv',
   path: '/pdv',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IfoodRoute = IfoodRouteImport.update({
+  id: '/ifood',
+  path: '/ifood',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HistoricoRoute = HistoricoRouteImport.update({
@@ -52,6 +58,7 @@ export interface FileRoutesByFullPath {
   '/configuracoes': typeof ConfiguracoesRoute
   '/estoque': typeof EstoqueRoute
   '/historico': typeof HistoricoRoute
+  '/ifood': typeof IfoodRoute
   '/pdv': typeof PdvRoute
   '/relatorios': typeof RelatoriosRoute
 }
@@ -60,6 +67,7 @@ export interface FileRoutesByTo {
   '/configuracoes': typeof ConfiguracoesRoute
   '/estoque': typeof EstoqueRoute
   '/historico': typeof HistoricoRoute
+  '/ifood': typeof IfoodRoute
   '/pdv': typeof PdvRoute
   '/relatorios': typeof RelatoriosRoute
 }
@@ -69,6 +77,7 @@ export interface FileRoutesById {
   '/configuracoes': typeof ConfiguracoesRoute
   '/estoque': typeof EstoqueRoute
   '/historico': typeof HistoricoRoute
+  '/ifood': typeof IfoodRoute
   '/pdv': typeof PdvRoute
   '/relatorios': typeof RelatoriosRoute
 }
@@ -79,6 +88,7 @@ export interface FileRouteTypes {
     | '/configuracoes'
     | '/estoque'
     | '/historico'
+    | '/ifood'
     | '/pdv'
     | '/relatorios'
   fileRoutesByTo: FileRoutesByTo
@@ -87,6 +97,7 @@ export interface FileRouteTypes {
     | '/configuracoes'
     | '/estoque'
     | '/historico'
+    | '/ifood'
     | '/pdv'
     | '/relatorios'
   id:
@@ -95,6 +106,7 @@ export interface FileRouteTypes {
     | '/configuracoes'
     | '/estoque'
     | '/historico'
+    | '/ifood'
     | '/pdv'
     | '/relatorios'
   fileRoutesById: FileRoutesById
@@ -104,6 +116,7 @@ export interface RootRouteChildren {
   ConfiguracoesRoute: typeof ConfiguracoesRoute
   EstoqueRoute: typeof EstoqueRoute
   HistoricoRoute: typeof HistoricoRoute
+  IfoodRoute: typeof IfoodRoute
   PdvRoute: typeof PdvRoute
   RelatoriosRoute: typeof RelatoriosRoute
 }
@@ -122,6 +135,13 @@ declare module '@tanstack/react-router' {
       path: '/pdv'
       fullPath: '/pdv'
       preLoaderRoute: typeof PdvRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ifood': {
+      id: '/ifood'
+      path: '/ifood'
+      fullPath: '/ifood'
+      preLoaderRoute: typeof IfoodRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/historico': {
@@ -160,6 +180,7 @@ const rootRouteChildren: RootRouteChildren = {
   ConfiguracoesRoute: ConfiguracoesRoute,
   EstoqueRoute: EstoqueRoute,
   HistoricoRoute: HistoricoRoute,
+  IfoodRoute: IfoodRoute,
   PdvRoute: PdvRoute,
   RelatoriosRoute: RelatoriosRoute,
 }
