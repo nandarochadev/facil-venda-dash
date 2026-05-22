@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import { AppShell } from "@/components/AppShell";
 import { Toaster } from "sonner";
 
 function NotFoundComponent() {
@@ -75,7 +76,7 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <AppShell />
       <Toaster position="top-right" richColors />
     </QueryClientProvider>
   );
