@@ -1,7 +1,5 @@
 {
   "framework": "vite",
-  "outputDirectory": "dist",
-  "buildCommand": "bun run build",
   "rewrites": [
     {
       "source": "/(.*)",
